@@ -11,4 +11,10 @@ class Website(models.Model):
     image = CloudinaryField('photos')
     title = models.TextField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        """Return username"""
+        return self.author.username
+
+    
