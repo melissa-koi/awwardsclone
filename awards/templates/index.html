@@ -2,4 +2,18 @@
 {% block content%}
 <p class="text-center my-4" style="font-size: larger;">The awards of design, creativity and innovation on the internet</p>
 <hr>
+<div class="col-md-12" style="margin-right: 5rem; margin-left:5rem">
+    <div class="card-group">
+        {% for gallery in cards %}
+        <div class="card" style="min-width:22rem; max-width:22rem ;margin-top: 30px; margin-bottom: 30px; margin-right: 2rem; border:1px solid lightgrey; font-size:15px; font-weight:300; font-family:sans-serif">
+            <img src="{{ gallery.image.url }}" style="height: 17rem;" class="card-img-top" alt="Image">
+            <div class="card-body">
+
+                <p class="card-">Location: {{gallery.location.name}}</p>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

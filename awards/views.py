@@ -3,11 +3,14 @@ from .forms import RegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from .models import Website
 
 # Create your views here.
 
 def home(request):
-    return render(request, 'index.html')
+    title = "Home Page"
+    cards = Website.get_all()
+    return render(request, 'index.html' ,{"title": title, "cards": cards})
 
 def registerUser(request):
     form = RegisterForm()

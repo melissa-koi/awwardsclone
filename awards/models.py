@@ -17,4 +17,7 @@ class Website(models.Model):
         """Return username"""
         return self.author.username
 
-    
+    @classmethod
+    def get_all(cls):
+        websites = cls.objects.all()
+        return websites
