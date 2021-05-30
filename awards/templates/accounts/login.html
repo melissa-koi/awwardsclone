@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% block content%}
+{{block.super}}
+<div class="container">
+    <div class="row" style="margin-left: 40%; margin-top: 10vh; ">
+       <div class="col-md-5" style="border:3px solid black; padding: 6vh; background-color:ivory">
+            <h1 style="color:green">Login</h1><br>
+            <form action="" method="post">
+                {% csrf_token %}
+                <label>Username</label><br>
+                <input type="text" name="username" class="my-2"><br>
+                <label>Password</label><br>
+                <input type="password" name="password" class="my-2"><br><br>
+                <button class="btn btn-secondary" type="submit" value="Login">Submit</button>
+
+                <p class="mt-3">Don't have an account? <a href="{% url 'register' %}" class="text-decoration-none">Sign in</a>
+                {% for message in messages %}
+                {{message}}
+                {% endfor %} <br>
+
+                
+            </form>
+        </div>
+    </div>
+    
+</div>
+{% endblock %}
