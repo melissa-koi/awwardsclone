@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content%}
+{{block.super}}
+
+<div class="container-fluid mt-5">
+    <h6 class="" style="font-style:italics;">{{photo.title}} from {{photo.location}}</h6>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{photo.website}}" >
+                <img style="width: 75%; height: 90vh; margin-top:3rem; margin-left:10rem" src="{{photo.image.url}}" id="imgid">
+            </a>
+            
+        </div>
+<!--        <div class="card my-5" style="border:3px solid grey">-->
+<!--            <div class="card-header" style="font-weight:bolder; text-align: center; font-size 15px">Description</div>-->
+<!--            <div class="card-body">-->
+<!--                <p style="font-size:20px; font-style:italic"> {{photo.description}}</p>-->
+<!--            </div>-->
+<!--        </div>-->
+
+    </div>
+</div>
+{% endblock %}

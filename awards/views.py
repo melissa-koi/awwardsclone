@@ -12,6 +12,18 @@ def home(request):
     cards = Website.get_all()
     return render(request, 'index.html' ,{"title": title, "cards": cards})
 
+def site(request, pk):
+    title= "site"
+    photo = Website.objects.get(id=pk)
+    return render(request, 'site.html', {"title": title, "photo": photo})
+
+
+
+
+
+
+
+
 def registerUser(request):
     form = RegisterForm()
     if request.method == 'POST':
