@@ -4,14 +4,27 @@
 <hr>
 <div class="col-md-12" style="margin-right: 5rem; margin-left:5rem">
     <div class="card-group">
-        {% for gallery in cards %}
+        {% for card in cards %}
         <div class="card" style="min-width:22rem; max-width:22rem ;margin-top: 30px; margin-bottom: 30px; margin-right: 2rem; border:1px solid lightgrey; font-size:15px; font-weight:300; font-family:sans-serif">
-            <img src="{{ gallery.image.url }}" style="height: 17rem;" class="card-img-top" alt="Image">
+            <img src="{{ card.image.url }}" style="height: 17rem;" class="card-img-top" alt="Image">
+                
+                <div class="image_overlay">
+                    <a href="#"><i style="margin-top: 0px;" class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <button style="border-radius: 15px; font-size: 13px; padding:12px; margin-top: 30%; position:absolute; margin-left: 35%;" class="btn btn-light">VOTE NOW</button>
+            
             <div class="card-body">
-
-                <p class="card-">Location: {{gallery.location.name}}</p>
+                <p style="font-weight: bold;">{{card.title}}</p>
+                <p style="font-family:Georgia, 'Times New Roman', Times, serif;font-size: 16px; font-weight: lighter;">From {{card.location}}<span style="font-size: 15px; margin-left:10vh">{{card.created|date:'M d, Y'}}</span></p>
+                <hr>
+                <div class="card-footer-section">
+                    <img class="footer_image" src="{{ card.image.url }}" style="border-radius: 50%; width: 3rem; height:3rem"><p style="display: inline-block; font-size:17px; margin-left:10px">By <span style="font-weight: bold; text-transform: uppercase; font-size:15px" >{{card.author.username}}</span></p>
+                </div>
             </div>
-
+           
         </div>
         {% endfor %}
     </div>
