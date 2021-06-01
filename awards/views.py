@@ -36,6 +36,7 @@ def site(request, pk):
 
 
 
+
 def registerUser(request):
     form = RegisterForm()
     if request.method == 'POST':
