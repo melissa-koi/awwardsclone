@@ -16,7 +16,8 @@ class LoginForm(UserCreationForm):
         fields = ['username', 'password']
 
 class RateForm(forms.ModelForm):
+    rate = forms.ChoiceField(choices=RATE_CHOICES, widget=forms.Select(), required=True)
 
     class Meta:
         model = Rate
-        fields = ['rate', ]
+        fields = ['rate','creativity','content', 'design', 'usability']

@@ -20,8 +20,6 @@ def site(request, pk):
     site = Website.objects.get(id=pk)
     rates = Rate.objects.filter(website=site)
     user = request.user
-
-
     if request.method == 'POST':
         form = RateForm(request.POST)
         if form.is_valid():
@@ -29,6 +27,7 @@ def site(request, pk):
             rate.user = user
             rate.website = site
             rate.save()
+
     else:
         form = RateForm()
 
