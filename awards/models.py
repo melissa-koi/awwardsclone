@@ -11,11 +11,16 @@ class Website(models.Model):
     image = CloudinaryField('photos')
     title = models.TextField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    author = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     description = models.TextField(null=True)
     def __str__(self):
         """Return username"""
         return self.author.username
+
+    @classmethod
+    def get_user(cls,username):
+        profile = cls.objects.filter(author__username__icontains=username)
+        return profile
 
     @classmethod
     def get_all(cls):

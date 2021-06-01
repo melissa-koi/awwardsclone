@@ -17,7 +17,7 @@
             <p style="position:absolute; top:20rem; left:30rem; color:white;" id="showtxt">Click to view website</p>
             <div class="card" style="background-color:white; margin-top:0px; width:75%;  margin-left:10rem; padding:2rem">
                 <h5 class="card-title">{{photo.title}}</h5>
-                <p class="card-text">by {{photo.author.username}}({{photo.location}})</p>
+                <p class="card-text">by {{photo.website.username}}({{photo.location}})</p>
                 <p>{{photo.description}}</p>
                 <div class="card-footer">
                 <form method="POST" enctype="multipart/form-data">
@@ -35,9 +35,7 @@
 
         <div class="col-md-12">
             <div class="card" style="width:75%;margin-top:3rem; margin-left:10rem">
-                <div class="card-header">
-                    Featured
-                </div>
+                <div class="card-header" style="padding:1.5rem">USER VOTES</div>
                  {%for rate in rates%}
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">

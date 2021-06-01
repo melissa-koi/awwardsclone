@@ -33,8 +33,9 @@ def site(request, pk):
 
     return render(request, 'site.html', {"title": title, "photo": photo, "form":form, "rates":rates})
 
-
-
+def profile(request,pk):
+    title="profile"
+    return render(request, 'site.html', {"title": title})
 
 
 def registerUser(request):
