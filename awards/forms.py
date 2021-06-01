@@ -20,4 +20,4 @@ class RateForm(forms.ModelForm):
 
     class Meta:
         model = Rate
-        fields = ['rate']
+        fields = ['design', 'usability', 'creativity', 'content', ]
