@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-
+{% load static %}
+{% load bootstrap5 %}
 {% block content%}
 {{block.super}}
 
@@ -11,16 +12,31 @@
     <div class="row">
         <div class="col-md-12">
             <a href="{{photo.website}}" >
-                <img style="width: 75%; height: 90vh; margin-top:3rem; margin-left:10rem" src="{{photo.image.url}}" id="imgid">
+                <img style="width: 75%; height: 90vh; margin-top:3rem; margin-left:10rem" src="{{photo.image.url}}" id="imgid" class="card-img-top">
             </a>
-            
+            <p style="position:absolute; top:20rem; left:30rem; color:white;" id="showtxt">Click to view website</p>
+            <div class="card" style="background-color:white; margin-top:0px; width:75%;  margin-left:10rem; padding:2rem">
+                <h5 class="card-title">{{photo.title}}</h5>
+                <p class="card-text">by {{photo.author.username}}({{photo.location}})</p>
+                <p>{{photo.description}}</p>
+                <div class="card-footer">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% bootstrap_form form%}
+                    <div class="form-group">
+
+                    </div>
+                </form>
+                    <button class="btn btn-info" type="submit" style="width:100%">Vote</button>
+                </div>
+            </div>
         </div>
-<!--        <div class="card my-5" style="border:3px solid grey">-->
-<!--            <div class="card-header" style="font-weight:bolder; text-align: center; font-size 15px">Description</div>-->
-<!--            <div class="card-body">-->
-<!--                <p style="font-size:20px; font-style:italic"> {{photo.description}}</p>-->
-<!--            </div>-->
-<!--        </div>-->
+
+        <div class="col-md-12">
+
+        </div>
+
+
 
     </div>
 </div>

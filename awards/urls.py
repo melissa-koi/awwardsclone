@@ -9,4 +9,5 @@ urlpatterns = [
     path('login/', views.loginUser, name = 'login'),
     path('logout/', views.logoutUser, name = 'logout'),
     path('site/<str:pk>/', views.site, name = 'site'),
+    # path('rate/<str:pk>/', views.Rate, name = 'rate'),
 ]

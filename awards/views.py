@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-from .forms import RegisterForm
+from .forms import RegisterForm, RateForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Website
+from .models import Website, Rate
 
 # Create your views here.
 
@@ -15,11 +15,21 @@ def home(request):
 def site(request, pk):
     title= "site"
     photo = Website.objects.get(id=pk)
-    return render(request, 'site.html', {"title": title, "photo": photo})
 
+    site = Website.objects.get(id=pk)
+    user = request.user
+    if request.method == 'POST':
+        form = RateForm(request.POST)
+        if form.is_valid():
+            rate = form.save(commit=False)
+            rate.user = user
+            rate.website = site
+            rate.save()
+    else:
+        form = RateForm()
 
-
-
+    rates = Rate.objects.get(id=pk)
+    return render(request, 'site.html', {"title": title, "photo": photo, "form":form})
 
 
 
