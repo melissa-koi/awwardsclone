@@ -14,12 +14,9 @@
                         <div class="ml-custom">
                             <div class="display">
                                 <p class="custom-fontsize">{{ request.user}}
-                                    <a href="{% url 'create_profile' %}" ><button class="btn btn-outline-secondary">Create Profile</button></a>
-                                    <a href="{% url 'update_profile' %}" ><button class="btn btn-outline-secondary">Edit Profile</button></a>
+<!--                                    -->
                                 </p>
-                                <p>
-                                    <i><strong id="pad-left">{{ user.image_set.all|length }}</strong> posts</i><i id="pad-left"><strong id="pad-left">{{ user|length}}</strong> followers</i><i id="pad-left"><strong >{{ user|length}}</strong> following</i>
-                                </p>
+
                             </div>
                             <p class="text-secondary"> Email: {{ user.email }}</p>
                             <p class="text-secondary">Bio: {{ user.profile.biography }}</p>
@@ -32,14 +29,37 @@
     </div>
     <hr>
     <div class="row">
-        {% if images %}
-        {% for image in images %}
-        <div class="col-md-3 mb-5" >
-            <a href="{% url 'image_detail' image.user.username %}" >
-                <img src="{{ image.image.url }}" alt="{{ image.image_caption }} image" id="profile-image">
-            </a>
+        {% if cards %}
+        <div class="col-md-12" style="">
+            <div class="card-group">
+                {% for card in cards %}
+                <div class="card" style="min-width:22rem; max-width:22rem ;margin-top: 30px; margin-bottom: 30px; margin-right: 2rem; border:1px solid lightgrey; font-size:15px; font-weight:300; font-family:sans-serif">
+                    <div class="contentz">
+                        <a >
+                            <img src="{{ card.image.url }}" style="height: 17rem; " class="card-img-top img-hoverin" alt="Image">
+                        </a>
+
+                        <div class="image_overlay">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-pinterest"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <button style="border-radius: 18px; font-size: 13px; padding:12px; margin-top: 30%; position:absolute;" class="btn btn-light"><a href="{% url 'site' card.id %}" style="text-decoration: none; color: black;">VOTE NOW</a></button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p style="font-weight: bold;">{{card.title}}</p>
+                        <p style="font-family:Georgia, 'Times New Roman', Times, serif;font-size: 16px; font-weight: lighter;">From {{card.location}}<span style="font-size: 15px; margin-left:10vh">{{card.created|date:'M d, Y'}}</span></p>
+                        <hr>
+                        <div class="card-footer-section">
+                            <img class="footer_image" src="{{ card.image.url }}" style="border-radius: 50%; width: 3rem; height:3rem"><p style="display: inline-block; font-size:17px; margin-left:10px">By <span style="font-weight: bold; text-transform: uppercase; font-size:15px" >{{card.author.username}}</span></p>
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+            </div>
         </div>
-        {% endfor %}
         {% else %}
         <h2 class="text-center">This user has not uploaded any images yet!!</h2>
         {% endif %}

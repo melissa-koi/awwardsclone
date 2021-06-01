@@ -46,9 +46,11 @@ def post_website(request):
         form = UploadWeb()
     return render(request, 'post_website.html', {"form":form})
 
-def profile(request,pk):
+def profile(request,username):
     title="profile"
-    return render(request, 'site.html', {"title": title})
+    site = Website.get_user(username)
+    print(site)
+    return render(request, 'profile.html', {"title": title, "cards":site})
 
 
 def registerUser(request):
