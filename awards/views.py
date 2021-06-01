@@ -18,6 +18,7 @@ def site(request, pk):
 
     site = Website.objects.get(id=pk)
     rates = Rate.objects.filter(website=site)
+    rates_avg =
 
     user = request.user
     if request.method == 'POST':

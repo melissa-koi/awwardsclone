@@ -27,7 +27,10 @@ RATE_CHOICES = [(1,'1'), (2,'2'), (3,'3'), (4,'4'), (5,'5'), (6,'6'), (7,'7'), (
 class Rate(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     website = models.ForeignKey(Website, on_delete=models.CASCADE, related_name="comments", null=True)
-    rate = models.PositiveSmallIntegerField(choices = RATE_CHOICES, blank=True)
+    design = models.PositiveSmallIntegerField(choices = RATE_CHOICES, blank=True)
+    usability = models.PositiveSmallIntegerField(choices = RATE_CHOICES, blank=True)
+    creativity = models.PositiveSmallIntegerField(choices = RATE_CHOICES, blank=True)
+    content = models.PositiveSmallIntegerField(choices = RATE_CHOICES, blank=True)
 
     def __str__(self):
         """Return username"""
