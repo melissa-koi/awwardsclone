@@ -17,6 +17,8 @@ def site(request, pk):
     photo = Website.objects.get(id=pk)
 
     site = Website.objects.get(id=pk)
+    rates = Rate.objects.filter(website=site)
+
     user = request.user
     if request.method == 'POST':
         form = RateForm(request.POST)
@@ -28,7 +30,7 @@ def site(request, pk):
     else:
         form = RateForm()
 
-    rates = Rate.objects.get(id=pk)
+
     return render(request, 'site.html', {"title": title, "photo": photo, "form":form})
 
 
