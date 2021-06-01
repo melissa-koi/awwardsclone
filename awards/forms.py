@@ -21,3 +21,9 @@ class RateForm(forms.ModelForm):
     class Meta:
         model = Rate
         fields = ['rate','creativity','content', 'design', 'usability']
+
+class UploadWeb(forms.ModelForm):
+    class Meta:
+        model = Website
+        fields = ['website', 'location', 'image', 'title', 'description']
+

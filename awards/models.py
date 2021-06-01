@@ -13,6 +13,7 @@ class Website(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     author = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     description = models.TextField(null=True)
+
     def __str__(self):
         """Return username"""
         return self.author.username

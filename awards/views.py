@@ -1,6 +1,6 @@
 from django.db.models import Avg, F, Sum
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, RateForm
+from .forms import RegisterForm, RateForm, UploadWeb
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -10,6 +10,7 @@ from .models import Website, Rate
 
 def home(request):
     title = "Home Page"
+    print(request.user)
     cards = Website.get_all()
     return render(request, 'index.html' ,{"title": title, "cards": cards})
 
@@ -27,11 +28,23 @@ def site(request, pk):
             rate.user = user
             rate.website = site
             rate.save()
-
     else:
         form = RateForm()
 
     return render(request, 'site.html', {"title": title, "photo": photo, "form":form, "rates":rates})
+
+def post_website(request):
+    C_user = request.user
+    if request.method == "POST":
+        form = UploadWeb(request.POST, request.FILES)
+        if form.is_valid():
+            img = form.save(commit=False)
+            img.author = C_user
+            img.save()
+        return redirect('home')
+    else:
+        form = UploadWeb()
+    return render(request, 'post_website.html', {"form":form})
 
 def profile(request,pk):
     title="profile"
