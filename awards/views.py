@@ -29,16 +29,24 @@ def site(request, pk):
             rate.user = user
             rate.website = site
             rate.save()
+    else:
+        form = RateForm()
+
 
         if rates is not None:
             design = request.POST.get("design")
             usability = request.POST.get("usability")
             content = request.POST.get("content")
             creativity = request.POST.get("creativity")
-            rating = Rate(design=design,usability=usability,content=content,creativity=creativity,user=request.user)
+            rating = Rate(design=design,usability=usability,content=content,creativity=creativity,user=request.user, website=site)
             rating.save()
-    else:
-        form = RateForm()
+        else:
+            design = request.POST.get("design")
+            usability = request.POST.get("usability")
+            content = request.POST.get("content")
+            creativity = request.POST.get("creativity")
+            rating = Rate(design=design,usability=usability,content=content,creativity=creativity,user=request.user, website=site)
+            rating.save()
 
 
     return render(request, 'site.html', {"title": title, "photo": photo, "form":form, "rates":rates, "site":site})
