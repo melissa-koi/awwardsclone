@@ -1,10 +1,10 @@
 from django.db.models import Avg, F, Sum
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, RateForm, UploadWeb
+from .forms import RegisterForm, RateForm, UploadWeb, CreateProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Website, Rate
+from .models import Website, Rate,Profile
 
 # Create your views here.
 
@@ -49,9 +49,21 @@ def post_website(request):
 def profile(request,username):
     title="profile"
     site = Website.get_user(username)
+    profile =  Profile.get_user(username)
     print(site)
-    return render(request, 'profile.html', {"title": title, "cards":site})
+    return render(request, 'profile.html', {"title": title, "cards":site, "profile":profile})
 
+def create_profile(request):
+    current_user=request.user
+    if request.method == 'POST':
+        form = CreateProfileForm(request.POST,request.FILES)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = current_user
+            profile.save()
+    else:
+        form = CreateProfileForm()
+    return render(request,'create_profile.html',{"form":form})
 
 def registerUser(request):
     form = RegisterForm()

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Website, RATE_CHOICES, Rate
+from .models import Website, RATE_CHOICES, Rate, Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -26,4 +26,9 @@ class UploadWeb(forms.ModelForm):
     class Meta:
         model = Website
         fields = ['website', 'location', 'image', 'title', 'description']
+
+class CreateProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ['user']
 

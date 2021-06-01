@@ -34,6 +34,61 @@ body{
     opacity:1;
 }
 
+.profile-img {
+    width: 200px;
+    height: 200px;
+}
+
+#profile-images {
+    height: 300px;
+    width: 300px;
+    padding: 10px;
+}
+
+#profile-image{
+    height: 280px;
+    width: 280px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.hide-button {
+    visibility: hidden;
+}
+
+.custom-center {
+    padding-left: 250px;
+}
+
+.ml-custom {
+    margin-left: 100px;
+}
+
+.custom-fontsize {
+    font-size: 50px;
+}
+
+#pad-left {
+    padding-left: 20px;
+}
+
+.card-footer-section{
+    margin-left: 1rem;
+}
+.username{
+    margin-left: 2rem;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    text-decoration: none;
+}
+.caption{
+    font-size: larger;
+}
+
+.gallery-image{
+    height: 35rem;
+}
 
 
 

@@ -42,3 +42,17 @@ class Rate(models.Model):
     def __str__(self):
         """Return username"""
         return self.user.username
+
+class Profile(models.Model):
+    bio = models.TextField(blank=True)
+    contact = models.CharField(max_length=20, blank=True)
+    picture = CloudinaryField('photos',default='default.jpg')
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+    def __str__(self):
+        """Return username"""
+        return self.contact
+    @classmethod
+    def get_user(cls,username):
+        profile = cls.objects.filter(user__username__icontains=username)
+        return profile
