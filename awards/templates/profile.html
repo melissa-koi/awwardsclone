@@ -1,0 +1,48 @@
+{%extends 'base.html'%}
+
+{% block content %}
+{{ block.super}}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="content-section">
+                <div class="media" style="display: flex">
+                    <img src="{{ user.profile.picture.url }}" alt="profile image" class="rounded-circle profile-img">
+                    <div class="media-body">
+                        <div class="ml-custom">
+                            <div class="display">
+                                <p class="custom-fontsize">{{ request.user}}
+                                    <a href="{% url 'create_profile' %}" ><button class="btn btn-outline-secondary">Create Profile</button></a>
+                                    <a href="{% url 'update_profile' %}" ><button class="btn btn-outline-secondary">Edit Profile</button></a>
+                                </p>
+                                <p>
+                                    <i><strong id="pad-left">{{ user.image_set.all|length }}</strong> posts</i><i id="pad-left"><strong id="pad-left">{{ user|length}}</strong> followers</i><i id="pad-left"><strong >{{ user|length}}</strong> following</i>
+                                </p>
+                            </div>
+                            <p class="text-secondary"> Email: {{ user.email }}</p>
+                            <p class="text-secondary">Bio: {{ user.profile.biography }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <hr>
+    <div class="row">
+        {% if images %}
+        {% for image in images %}
+        <div class="col-md-3 mb-5" >
+            <a href="{% url 'image_detail' image.user.username %}" >
+                <img src="{{ image.image.url }}" alt="{{ image.image_caption }} image" id="profile-image">
+            </a>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h2 class="text-center">This user has not uploaded any images yet!!</h2>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
