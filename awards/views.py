@@ -1,3 +1,4 @@
+from django.db.models import Avg, F, Sum
 from django.shortcuts import render, redirect
 from .forms import RegisterForm, RateForm
 from django.contrib.auth import authenticate, login, logout
@@ -17,10 +18,10 @@ def site(request, pk):
     photo = Website.objects.get(id=pk)
 
     site = Website.objects.get(id=pk)
-
-
-
+    rates = Rate.objects.filter(website=site)
     user = request.user
+
+
     if request.method == 'POST':
         form = RateForm(request.POST)
         if form.is_valid():
@@ -28,11 +29,19 @@ def site(request, pk):
             rate.user = user
             rate.website = site
             rate.save()
+
+        if rates is not None:
+            design = request.POST.get("design")
+            usability = request.POST.get("usability")
+            content = request.POST.get("content")
+            creativity = request.POST.get("creativity")
+            rating = Rate(design=design,usability=usability,content=content,creativity=creativity,user=request.user)
+            rating.save()
     else:
         form = RateForm()
 
 
-    return render(request, 'site.html', {"title": title, "photo": photo, "form":form})
+    return render(request, 'site.html', {"title": title, "photo": photo, "form":form, "rates":rates, "site":site})
 
 
 
