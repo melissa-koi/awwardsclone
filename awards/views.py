@@ -8,13 +8,13 @@ from .models import Website, Rate,Profile
 from django.contrib.auth.models import User
 
 # Create your views here.
-@login_required(login_url='/login/')
+
 def home(request):
     title = "Home Page"
     cards = Website.get_all()
     return render(request, 'index.html' ,{"title": title, "cards": cards})
 
-@login_required(login_url='/login/')
+
 def site(request, pk):
     title= "site"
     photo = Website.objects.get(id=pk)
@@ -34,21 +34,22 @@ def site(request, pk):
 
     return render(request, 'site.html', {"title": title, "photo": photo, "form":form, "rates":rates})
 
-@login_required(login_url='/login/')
+
 def post_website(request):
-    C_user = request.user
+    current_user = request.user
+    print(current_user)
     if request.method == "POST":
         form = UploadWeb(request.POST, request.FILES)
         if form.is_valid():
             img = form.save(commit=False)
-            img.author = C_user
+            img.author =current_user
             img.save()
         return redirect('home')
     else:
         form = UploadWeb()
     return render(request, 'post_website.html', {"form":form})
 
-@login_required(login_url='/login/')
+
 def profile(request,username):
     title="profile"
     site = Website.get_user(username)
@@ -56,7 +57,7 @@ def profile(request,username):
     print(request.user)
     return render(request, 'profile.html', {"title": title, "cards":site, "profiles":profile})
 
-@login_required(login_url='/login/')
+
 def update_profile(request,profile_id):
     user=User.objects.get(pk=profile_id)
     if request.method == "POST":
@@ -72,7 +73,7 @@ def update_profile(request,profile_id):
 
     return render(request,'update_profile.html',{"u_form":u_form, "p_form":p_form})
 
-@login_required(login_url='/login/')
+
 def search_results(request):
     if 'projects' in request.GET and request.GET["projects"]:
         search_term = request.GET.get("projects")

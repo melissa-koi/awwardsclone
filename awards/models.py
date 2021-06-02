@@ -16,7 +16,7 @@ class Profile(models.Model):
 
     def __str__(self):
         """Return username"""
-        return self.contact
+        return self.user.username
 
     @classmethod
     def get_user(cls,username):
@@ -31,6 +31,9 @@ class Profile(models.Model):
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
+
+    def delete_profile(self):
+        self.delete()
 
 class Website(models.Model):
     website = models.URLField(max_length=1000)
