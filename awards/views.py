@@ -1,17 +1,18 @@
 from django.db.models import Avg, F, Sum
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, RateForm, UploadWeb, CreateProfileForm
+from .forms import RegisterForm, RateForm, UploadWeb, CreateProfileForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Website, Rate,Profile
+from django.contrib.auth.models import User
 
 # Create your views here.
 
 def home(request):
     title = "Home Page"
-    print(request.user)
     cards = Website.get_all()
+    print(request.user)
     return render(request, 'index.html' ,{"title": title, "cards": cards})
 
 def site(request, pk):
@@ -50,20 +51,37 @@ def profile(request,username):
     title="profile"
     site = Website.get_user(username)
     profile =  Profile.get_user(username)
-    print(site)
+    print(request.user)
     return render(request, 'profile.html', {"title": title, "cards":site, "profile":profile})
 
-def create_profile(request):
-    current_user=request.user
-    if request.method == 'POST':
-        form = CreateProfileForm(request.POST,request.FILES)
-        if form.is_valid():
-            profile = form.save(commit=False)
-            profile.user = current_user
-            profile.save()
+def update_profile(request,profile_id):
+    user=User.objects.get(pk=profile_id)
+    print(user)
+    if request.method == "POST":
+        u_form = UserUpdateForm(request.POST,instance=request.user)
+        p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request,f"You Have Successfully Updated Your Profile!")
     else:
-        form = CreateProfileForm()
-    return render(request,'create_profile.html',{"form":form})
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    return render(request,'update_profile.html',{"u_form":u_form, "p_form":p_form})
+
+def search_results(request):
+    if 'project' in request.GET and request.GET["project"]:
+        search_term = request.GET.get("project")
+        searched_project = Website.get_projects(search_term)
+        message = f'Search results for{search_term}'
+
+        return render(request, 'search.html',{"message":message,"cards": searched_project})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'search.html',{"message":message})
+
 
 def registerUser(request):
     form = RegisterForm()

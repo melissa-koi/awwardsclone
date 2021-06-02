@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-light ">
+    <div class="container-fluid px-0 d-flex justify-content-between nav-border text-white-50">
+       
+        <div id="menu-toogle" class="d-flex align-items-center w-25 ml-4">
+                        <span class="mr-2">
+                            <i class="fas fa-sliders-h"></i>
+                        </span>
+            <h6 class="mb-0 pr-4 f-12 " style="color:black; margin-right:20px">MENU|</h6>
+
+
+            <div class=" d-flex align-items-center">
+                <form class="d-flex justify-items-center" action="{% url 'search_results' %}" role="search">
+                    <div class="input-group mb-0 d-flex align-items-center ml-5">
+                        <input type="text" class="form-control"  placeholder="Search projects" name="projects">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit">Submit</i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="center" class="d-flex align-items-center">
+            <a class="nav-link " href="{% url 'home' %}">
+                <h2 class="mb-0" style="color:black">AWWWARDS.</h2>
+            </a>
+        </div>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" style="text-decoration: none; margin-top:15px" href="{% url 'home' %}">Home</a>
+            </li>
+            
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link"  style="text-decoration: none; margin-top:15px" href="{% url 'logout' %}">logout</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"  style="text-decoration: none; margin-top:15px" href="{% url 'update_profile' user.profile.id%}">Edit Profile</a>
+            </li>
+            <a href="/profile/{{ user.username }}" class=" d-flex justify-content-center" style="text-decoration: none; margin-top:10px; margin:10px"><span style="color: black; text-transform:uppercase; font-size: 16px; margin-top: 13px; margin-right: 10px;">{{ user.username }}</span>
+                <img class="nav-img" src="{{ user.profile.picture.url }}" alt="">
+            </a>
+            <button class="btn btn-info">
+                <li class="nav-item">
+                    <a class="nav-link" style="text-decoration: none; padding:20px; color:white" href="{% url 'post_website' %}">Submit Your Site</a>
+                </li>
+            </button>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" style="text-decoration: none; margin-top:15px" href="{% url 'register' %}">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="text-decoration: none; margin-top:15px" href="{% url 'login' %}">login</a>
+            </li>
+            {% endif %}
+            <div class="justify-content-end">
+    
+            </div>
+        </ul>
+    </div>
+</nav>
+<hr>

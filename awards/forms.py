@@ -16,11 +16,10 @@ class LoginForm(UserCreationForm):
         fields = ['username', 'password']
 
 class RateForm(forms.ModelForm):
-    rate = forms.ChoiceField(choices=RATE_CHOICES, widget=forms.Select(), required=True)
 
     class Meta:
         model = Rate
-        fields = ['rate','creativity','content', 'design', 'usability']
+        fields = ['creativity','content', 'design', 'usability']
 
 class UploadWeb(forms.ModelForm):
     class Meta:
@@ -31,4 +30,24 @@ class CreateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = ['user']
+
+class UserUpdateForm(forms.ModelForm):
+    '''
+    Form to update user profile
+    '''
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['username','email']
+
+class ProfileUpdateForm(forms.ModelForm):
+    '''
+    Form to update user profile picture
+    '''
+
+    class Meta:
+        model = Profile
+        fields = ['bio','contact', 'picture', 'location']
+
 
