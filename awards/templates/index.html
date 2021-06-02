@@ -12,11 +12,12 @@
                 </a>
 
                 <div class="image_overlay">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-pinterest"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href=""><i class="fab fa-facebook"></i></a>
+                    <a href=""><i class="fab fa-twitter"></i></a>
+                    <a href=""><i class="fab fa-pinterest"></i></a>
+                    <a href=""><i class="fab fa-linkedin"></i></a>
                     <button style="border-radius: 18px; font-size: 13px; padding:12px; margin-top: 30%; position:absolute;" class="btn btn-light"><a href="{% url 'site' card.id %}" style="text-decoration: none; color: black;">VOTE NOW</a></button>
+                    <a href="/profile/{{card.author.username}}" style="margin-left:10px">Profile</a>
                 </div>
             </div>
             <div class="card-body">
@@ -24,7 +25,7 @@
                 <p style="font-family:Georgia, 'Times New Roman', Times, serif;font-size: 16px; font-weight: lighter;">From {{card.location}}<span style="font-size: 15px; margin-left:10vh">{{card.created|date:'M d, Y'}}</span></p>
                 <hr>
                 <div class="card-footer-section">
-                    <img class="footer_image" src="{{ card.image.url }}" style="border-radius: 50%; width: 3rem; height:3rem"><p style="display: inline-block; font-size:17px; margin-left:10px">By <span style="font-weight: bold; text-transform: uppercase; font-size:15px" >{{card.author.username}}</span></p>
+                    <img class="footer_image" src="{{ card.image.url }}" style="border-radius: 50%; width: 3rem; height:3rem"><p style="display: inline-block; font-size:17px; margin-left:10px">By<span style="font-weight: bold; text-transform: uppercase; font-size:15px" >{{card.author.username}}</span></p>
                 </div>
             </div>
            

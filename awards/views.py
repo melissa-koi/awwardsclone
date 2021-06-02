@@ -49,14 +49,13 @@ def post_website(request):
 
 def profile(request,username):
     title="profile"
+    site = Website.get_user(username)
     profile =  Profile.get_user(username)
-    site = Website.user_projects(profile)
     print(request.user)
-    return render(request, 'profile.html', {"title": title, "cards":site, "profile":profile})
+    return render(request, 'profile.html', {"title": title, "cards":site, "profiles":profile})
 
 def update_profile(request,profile_id):
     user=User.objects.get(pk=profile_id)
-    print(user)
     if request.method == "POST":
         u_form = UserUpdateForm(request.POST,instance=request.user)
         p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)

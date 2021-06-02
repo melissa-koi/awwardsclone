@@ -37,7 +37,7 @@
             <li class="nav-item">
                 <a class="nav-link"  style="text-decoration: none; margin-top:15px" href="{% url 'update_profile' user.profile.id%}">Edit Profile</a>
             </li>
-            <a href="/profile/{{ user.username }}" class=" d-flex justify-content-center" style="text-decoration: none; margin-top:10px; margin:10px"><span style="color: black; text-transform:uppercase; font-size: 16px; margin-top: 13px; margin-right: 10px;">{{ user.username }}</span>
+            <a href="/profile/{{ request.user.username }}" class=" d-flex justify-content-center" style="text-decoration: none; margin-top:10px; margin:10px"><span style="color: black; text-transform:uppercase; font-size: 16px; margin-top: 13px; margin-right: 10px;">{{ user.username }}</span>
                 <img class="nav-img" src="{{ user.profile.picture.url }}" alt="">
             </a>
             <button class="btn btn-info">

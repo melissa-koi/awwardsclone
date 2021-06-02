@@ -5,25 +5,25 @@
 
 <div class="container">
     <div class="row">
-
+        {% for profile in profiles %}
         <div class="col-md-12">
             <div class="content-section text-center mt-3">
                 <div class="media" >
-                    <img src="{{ user.profile.picture.url }}" alt="profile image" class="rounded-circle profile-img">
+                    <img src="{{ profile.picture.url }}" alt="profile image" class="rounded-circle profile-img">
                     <div class="media-body">
                         <div class="ml-custom">
                             <div class="display">
-                                <p class="custom-fontsize">{{ request.user}}</p>
+                                <p class="custom-fontsize">{{ profile.user.username}}</p>
                             </div>
-                            <p class="text-secondary"> {{ user.profile.location }}</p>
-                            <p class=""> {{ user.profile.bio }}</p>
-                            <p class="text-secondary">Contact: {{ user.profile.contact }} or {{ user.email }}</p>
+                            <p class="text-secondary"> {{ profile.location }}</p>
+                            <p class=""> {{ profile.bio }}</p>
+                            <p class="text-secondary">Contact: {{ profile.contact }} or {{ profile.user.email }}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+        {% endfor %}
     </div>
     <hr>
     <div class="row">
@@ -38,10 +38,10 @@
                         </a>
 
                         <div class="image_overlay">
-                            <a href="facebook.com"><i class="fab fa-facebook"></i></a>
-                            <a href="twitter.com"><i class="fab fa-twitter"></i></a>
-                            <a href="pinterest.com"><i class="fab fa-pinterest"></i></a>
-                            <a href="linkedin.com"><i class="fab fa-linkedin"></i></a>
+                            <a href=""><i class="fab fa-facebook"></i></a>
+                            <a href=""><i class="fab fa-twitter"></i></a>
+                            <a href=""><i class="fab fa-pinterest"></i></a>
+                            <a href=""><i class="fab fa-linkedin"></i></a>
                             <button style="border-radius: 18px; font-size: 13px; padding:12px; margin-top: 30%; position:absolute;" class="btn btn-light"><a href="{% url 'site' card.id %}" style="text-decoration: none; color: black;">VOTE NOW</a></button>
                         </div>
                     </div>
