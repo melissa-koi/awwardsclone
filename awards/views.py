@@ -49,8 +49,8 @@ def post_website(request):
 
 def profile(request,username):
     title="profile"
-    site = Website.get_user(username)
     profile =  Profile.get_user(username)
+    site = Website.user_projects(profile)
     print(request.user)
     return render(request, 'profile.html', {"title": title, "cards":site, "profile":profile})
 
@@ -71,16 +71,16 @@ def update_profile(request,profile_id):
     return render(request,'update_profile.html',{"u_form":u_form, "p_form":p_form})
 
 def search_results(request):
-    if 'project' in request.GET and request.GET["project"]:
-        search_term = request.GET.get("project")
+    if 'projects' in request.GET and request.GET["projects"]:
+        search_term = request.GET.get("projects")
         searched_project = Website.get_projects(search_term)
-        message = f'Search results for{search_term}'
+        message = f'{search_term}'
 
         return render(request, 'search.html',{"message":message,"cards": searched_project})
 
     else:
         message = "You haven't searched for any term"
-        return render(request, 'search.html',{"message":message})
+    return render(request, 'search.html',{"message":message})
 
 
 def registerUser(request):
