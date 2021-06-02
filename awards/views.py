@@ -12,7 +12,6 @@ from django.contrib.auth.models import User
 def home(request):
     title = "Home Page"
     cards = Website.get_all()
-    print(request.user)
     return render(request, 'index.html' ,{"title": title, "cards": cards})
 
 def site(request, pk):

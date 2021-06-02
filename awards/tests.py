@@ -51,7 +51,7 @@ class TestWebsiteTest(TestCase):
         self.assertTrue(isinstance(self.project, Website))
 
     def test_save_project(self):
-        self.project.save_project()
-        total_proj=Website.objects.all()
-        self.assertEqual(len(total_proj),1)
+        self.project.save()
+        projects=Website.objects.all()
+        self.assertEqual(len(projects),1)
 
