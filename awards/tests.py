@@ -6,19 +6,6 @@ from django.contrib.auth.models import User
 # Create your tests here.
 
 
-# class TestUser (TestCase):
-#     def setUp(self):
-#         self.name = User(username='somename')
-#         self.name.save()
-#
-#     def tearDown(self):
-#         User.objects.all().delete()
-#
-#     def test_instance(self):
-#         self.assertEqual(self.name.username, 'somename')
-#         self.assertTrue(isinstance(self.name, User))
-
-
 class TestUserProfile (TestCase):
 
     def setUp(self):
@@ -28,37 +15,35 @@ class TestUserProfile (TestCase):
                                   picture='pic.png', location='someniceplace', bio='bio')
 
     def tearDown(self):
-        self.lord_stark.save()
-        self.lord_stark.delete()
+        Profile.objects.all().delete()
 
     def test_instance(self):
         self.assertTrue(isinstance(self.lord_stark, Profile))
 
     def test_save_profile(self):
-        self.lord_stark.save(self.name)
+        self.lord_stark.save_profile
         self.assertTrue(len(Profile.objects.all()) > 0)
 
     def test_delete_profile(self):
-        self.lord_stark.save(self.name)
+        self.lord_stark.save_profile
+        profile = Profile.objects.all()
         self.lord_stark.delete_profile()
-        self.assertTrue(len(Profile.objects.all()) < 1)
+        self.assertTrue(len(profile) < 1)
 
+class TestWebsiteTest(TestCase):
+    def setUp(self):
+        self.name = User(username='somename' ,email='name@gmail.com')
+        self.name.save()
+        self.site=Website(author=self.name ,title='somename',description='desc',image='image.png',website='https://www.google.com/',profile=self.user, location='Dubai')
 
-# class TestWebsiteTest(TestCase):
-#     def setUp(self):
-#         self.user=User.objects.create(username='name')
-#         self.user.save()
-#         self.project=Website.objects.create(id=1,title='somename',description='desc',image='image.png',urls='https://www.google.com/',profile=self.user)
-#
-#     def tearDown(self):
-#         Website.objects.all().delete()
-#         User.objects.all().delete()
-#
-#     def test_instance(self):
-#         self.assertTrue(isinstance(self.project, Website))
-#
-#     def test_save_project(self):
-#         self.project.save()
-#         projects=Website.objects.all()
-#         self.assertEqual(len(projects),1)
-#
+    def tearDown(self):
+        Website.objects.all().delete()
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.project, Website))
+
+    def test_save_project(self):
+        self.project.save()
+        projects=Website.objects.all()
+        self.assertEqual(len(projects),1)
+
