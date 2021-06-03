@@ -39,7 +39,7 @@
                  {%for rate in rates%}
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <a href="/profile/{{ rate.website.author.username }}"><img class="" src="{{ rate.website.image.url }}" style="border-radius: 50%; width: 3rem; height:3rem"></a>
+                            <a href="/profile/{{ rate.website.author.username }}"><img class="" src="{{ user.profile.picture.url }}" style="border-radius: 50%; width: 3rem; height:3rem"></a>
                             <p style="display: inline-block; font-size:17px; margin-left:20px"><span style="font-weight: bold;" >{{rate.website.author.username}}</span> from {{rate.website.location}}</p>
                             <p style="display:flex; flex-direction:row; justify-content:flex-end;">{{rate.creativity}} {{rate.content}} {{rate.design}} {{rate.usability}}</p>
                         </li>
